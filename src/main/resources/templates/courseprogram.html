@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LES - Course program</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>Available courses at Lyngby Evening School</h1>
+
+<ul>
+    <li class="course-item" th:each="c : ${courses}" th:id="${c.id}" th:text="${c}" th:attr="data-course-id=${c.id}"></li>
+</ul>
+
+<script>
+    $(".course-item").click(function(element) {
+        window.location = "/coursedetails?courseid=" + $(this).attr("data-course-id");
+    });
+</script>
+
+</body>
+</html>

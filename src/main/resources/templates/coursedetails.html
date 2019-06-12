@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LES - Course details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<input type="hidden" th:val="${course.id}">
+
+<label th:text="${course.subject.subject}"></label>
+<br/>
+<label th:text="${course.hours} + ' hours long'"></label>
+<br/>
+<label th:text="${course.startDate}"></label>
+<br/>
+<label th:text="${course.endDate}"></label>
+<br/>
+
+<form action="/enrollcourse">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" type="text"/>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" type="email"/>
+    </div>
+    <div class="form-group">
+        <label for="cardNumber">Card number:</label>
+        <input id="cardNumber" type="number"/>
+    </div>
+    <div class="form-group">
+        <label for="expirationMonth">Expiration month:</label>
+        <input id="expirationMonth" type="number"/>
+    </div>
+    <div class="form-group">
+        <label for="expirationYear">Expiration year:</label>
+        <input id="expirationYear" type="number"/>
+    </div>
+    <div class="form-group">
+        <label for="cvv">CVV:</label>
+        <input id="cvv" type="number"/>
+    </div>
+    <div class="form-group">
+        <label for="birthday">Birthday:</label>
+        <input id="birthday" type="number"/>
+    </div>
+</form>
+
+</body>
+</html>
