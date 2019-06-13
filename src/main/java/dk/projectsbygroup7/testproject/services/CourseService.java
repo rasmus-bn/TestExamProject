@@ -1,7 +1,9 @@
 package dk.projectsbygroup7.testproject.services;
 
 import dk.projectsbygroup7.testproject.pojos.Course;
+import dk.projectsbygroup7.testproject.pojos.CreditCardInfo;
 import dk.projectsbygroup7.testproject.pojos.Subject;
+import dk.projectsbygroup7.testproject.pojos.User;
 import org.springframework.stereotype.Service;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -23,7 +25,7 @@ public class CourseService {
             new Course(4, s2, 80, LocalDate.now(), LocalDate.now().plusMonths(1))
     ));
 
-    public boolean enrollInCourse() {
+    public EnrollmentStatus enrollInCourse(CreditCardInfo card, User user) {
         throw new NotImplementedException();
     }
 

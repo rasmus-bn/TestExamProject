@@ -9,44 +9,47 @@
 
 <input type="hidden" th:val="${course.id}">
 
-<label th:text="${course.subject.subject}"></label>
+<h1 th:text="${course.subject.subject}"></h1>
 <br/>
 <label th:text="${course.hours} + ' hours long'"></label>
 <br/>
-<label th:text="${course.startDate}"></label>
+<label th:text="'Start date: ' + ${course.startDate}"></label>
 <br/>
-<label th:text="${course.endDate}"></label>
+<label th:text="'End date: ' + ${course.endDate}"></label>
 <br/>
 
-<form action="/enrollcourse">
+<h2>Please enter below information to enroll the to course</h2>
+<form action="/enrollcourse" method="post">
     <div class="form-group">
         <label for="name">Name:</label>
-        <input id="name" type="text"/>
-    </div>
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input id="email" type="email"/>
-    </div>
-    <div class="form-group">
-        <label for="cardNumber">Card number:</label>
-        <input id="cardNumber" type="number"/>
-    </div>
-    <div class="form-group">
-        <label for="expirationMonth">Expiration month:</label>
-        <input id="expirationMonth" type="number"/>
-    </div>
-    <div class="form-group">
-        <label for="expirationYear">Expiration year:</label>
-        <input id="expirationYear" type="number"/>
-    </div>
-    <div class="form-group">
-        <label for="cvv">CVV:</label>
-        <input id="cvv" type="number"/>
+        <input id="name" name="name" type="text"/>
     </div>
     <div class="form-group">
         <label for="birthday">Birthday:</label>
-        <input id="birthday" type="number"/>
+        <input id="birthday" name="birthday" type="date"/>
     </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" name="email" type="email"/>
+    </div>
+    <h3>Your enrollment is not accepted before the payment has been approved.</h3>
+    <div class="form-group">
+        <label for="cardNumber">Card number:</label>
+        <input id="cardNumber" name="cardNumber" type="number"/>
+    </div>
+    <div class="form-group">
+        <label for="expirationMonth">Expiration month:</label>
+        <input id="expirationMonth" name="expirationMonth" type="number"/>
+    </div>
+    <div class="form-group">
+        <label for="expirationYear">Expiration year:</label>
+        <input id="expirationYear" name="expirationYear" type="number"/>
+    </div>
+    <div class="form-group">
+        <label for="cvv">CVV:</label>
+        <input id="cvv" name="cvv" type="number"/>
+    </div>
+    <input type="submit" value="Register enrollment"/>
 </form>
 
 </body>

@@ -1,5 +1,9 @@
 package dk.projectsbygroup7.testproject.web.viewmodels;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class EnrollCourseViewModel {
@@ -14,14 +18,14 @@ public class EnrollCourseViewModel {
     public EnrollCourseViewModel() {
     }
 
-    public EnrollCourseViewModel(String name, String email, String cardNumber, int expirationMonth, int expirationYear, int cvv, LocalDate birthday) {
+    public EnrollCourseViewModel(String name, LocalDate birthday, String email, String cardNumber, int expirationMonth, int expirationYear, int cvv) {
         this.name = name;
+        this.birthday = birthday;
         this.email = email;
         this.cardNumber = cardNumber;
         this.expirationMonth = expirationMonth;
         this.expirationYear = expirationYear;
         this.cvv = cvv;
-        this.birthday = birthday;
     }
 
     public String getName() {
