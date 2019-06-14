@@ -13,6 +13,18 @@ public class TimeService {
         return LocalDate.now();
     }
 
+    public int getCurrentYear() {
+        return getNow().getYear();
+    }
+
+    public int getCurrentMonth() {
+        return getNow().getMonthValue();
+    }
+
+    public int getCurrentDayNo() {
+        return getNow().getDayOfMonth();
+    }
+
     public long calcYearlyDifference(LocalDate fromDate, LocalDate toDate){
         return YEARS.between(fromDate, toDate);
     }
