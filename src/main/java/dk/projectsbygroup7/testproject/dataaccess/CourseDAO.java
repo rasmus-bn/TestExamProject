@@ -12,46 +12,27 @@ public class CourseDAO {
     @Autowired
     DBConnHandler connHandler;
 
-    public int createCourse(Course newCourse) {
-
-        Connection conn = connHandler.getConn();
+    public int createCourse (Course newCourse) {
 
         String sql = "" +
                 "insert into course (subject, hours, startDate, endDate)\n" +
                 "values (?,?,?,?); " +
                 "select last_insert_id() as id;";
-        ResultSet rs = null;
-        PreparedStatement stmt = null;
 
-        try {
-            stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        class Preparer implements IPreparer {
 
-            stmt.setString(1, newCourse.getSubject().getName());
-            stmt.setInt(2, newCourse.getHours());
-            Date startDate = Date.valueOf(newCourse.getStartDate());
-            stmt.setDate(3, startDate);
-            Date endDate = Date.valueOf(newCourse.getEndDate());
-            stmt.setDate(4, endDate);
-
-            stmt.executeUpdate();
-
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1);
-                }
-                else {
-                    throw new SQLException("Couldn't retrieve " + Course.class.getSimpleName() + " ID.");
-                }
+            @Override
+            public PreparedStatement prepare(PreparedStatement stmt) throws SQLException {
+                stmt.setString(1, newCourse.getSubject().getName());
+                stmt.setInt(2, newCourse.getHours());
+                Date startDate = Date.valueOf(newCourse.getStartDate());
+                stmt.setDate(3, startDate);
+                Date endDate = Date.valueOf(newCourse.getEndDate());
+                stmt.setDate(4, endDate);
+                return stmt;
             }
         }
-        catch (SQLException ex){
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-        finally {
-            connHandler.closeConn(rs,stmt,conn);
-        }
-        return 0;
+
+        return connHandler.doInsert(sql, new Preparer());
     }
 }

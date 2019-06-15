@@ -4,13 +4,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 @Service
 public class DBConnHandler {
     @Value("${dbconnectionstring}")
     private String dbConString;
 
-    public Connection getConn() {
+    private Connection getConn() {
         Connection conn = null;
         System.out.println(dbConString);
 
@@ -25,7 +26,7 @@ public class DBConnHandler {
         return conn;
     }
 
-    public void closeConn(ResultSet rs, PreparedStatement stmt, Connection conn) {
+    private void closeConn(ResultSet rs, PreparedStatement stmt, Connection conn) {
         if (rs != null) {
             try {
                 rs.close();
@@ -50,5 +51,60 @@ public class DBConnHandler {
 
             conn = null;
         }
+    }
+
+    public int doInsert(String sql, IPreparer preparer) {
+        Connection conn = this.getConn();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt = preparer.prepare(stmt);
+            stmt.executeUpdate();
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                }
+                else {
+                    return 0;
+                }
+            }
+        }
+        catch (SQLException ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        finally {
+            this.closeConn(null,stmt,conn);
+        }
+
+        return 0;
+    }
+
+    public <T> ArrayList<T> doSelectAll(String sql, IResultRowReader<T> reader) {
+        ArrayList resultList = new ArrayList();
+        Connection conn = this.getConn();
+        ResultSet rs = null;
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                resultList.add(reader.readResult(rs));
+            }
+        }
+        catch (SQLException ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        finally {
+            this.closeConn(rs,stmt,conn);
+        }
+
+        return resultList;
     }
 }
