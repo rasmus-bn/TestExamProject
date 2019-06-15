@@ -1,6 +1,5 @@
 package dk.projectsbygroup7.testproject.pojos;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -66,7 +65,7 @@ public class Course {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM-yyyy");
 
-        String txt = subject.subject + ", ";
+        String txt = subject.name + ", ";
         txt += hours + " hours, ";
         txt += "start: " + startDate.format(formatter) + ", ";
         txt += "end: " + endDate.format(formatter) + "";

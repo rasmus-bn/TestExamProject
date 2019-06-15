@@ -3,12 +3,10 @@ package dk.projectsbygroup7.testproject.dataaccess;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 @Service
-public class DBConnection {
+public class DBConnHandler {
     @Value("${dbconnectionstring}")
     private String dbConString;
 
@@ -25,5 +23,32 @@ public class DBConnection {
             e.printStackTrace();
         }
         return conn;
+    }
+
+    public void closeConn(ResultSet rs, PreparedStatement stmt, Connection conn) {
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException sqlEx) { }
+
+            rs = null;
+        }
+
+        if (stmt != null) {
+            try {
+                stmt.close();
+            } catch (SQLException sqlEx) { }
+
+            stmt = null;
+        }
+
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException sqlEx) {
+            }
+
+            conn = null;
+        }
     }
 }

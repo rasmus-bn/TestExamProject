@@ -1,18 +1,18 @@
 package dk.projectsbygroup7.testproject.web.controllers;
 
-import dk.projectsbygroup7.testproject.dataaccess.DBConnection;
+import dk.projectsbygroup7.testproject.dataaccess.CourseDAO;
+import dk.projectsbygroup7.testproject.dataaccess.DBConnHandler;
 import dk.projectsbygroup7.testproject.pojos.Course;
 import dk.projectsbygroup7.testproject.pojos.CreditCardInfo;
+import dk.projectsbygroup7.testproject.pojos.Subject;
 import dk.projectsbygroup7.testproject.pojos.User;
 import dk.projectsbygroup7.testproject.services.CourseService;
-import dk.projectsbygroup7.testproject.services.EnrollmentStatus;
 import dk.projectsbygroup7.testproject.web.exceptions.Exception404;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,11 +24,25 @@ public class WebController {
     CourseService courseService;
 
     @Autowired
-    DBConnection dbConn;
+    CourseDAO courseDAO;
+
+    @Autowired
+    DBConnHandler dbConn;
 
     @RequestMapping(value={"", "/", "/index","/home"})
     public String home() {
-        dbConn.getConn();
+        //dbConn.getConn();
+
+        Subject eng = new Subject();
+        eng.setName("eng");
+        int i = courseDAO.createCourse(new Course(
+                0,
+                eng,
+                30,
+                LocalDate.now(),
+                LocalDate.now()
+        ));
+        System.out.println(i);
         return "home.html";
     }
 

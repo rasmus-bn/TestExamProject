@@ -1,25 +1,25 @@
 package dk.projectsbygroup7.testproject.pojos;
 
 public class Subject {
-    String subject;
+    String name;
     int initYear;
     boolean is1stSemInit;
 
     public Subject() {
     }
 
-    public Subject(String subject, int initYear, boolean is1stSemInit) {
-        this.subject = subject;
+    public Subject(String name, int initYear, boolean is1stSemInit) {
+        this.name = name;
         this.initYear = initYear;
         this.is1stSemInit = is1stSemInit;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getName() {
+        return name;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getInitYear() {
