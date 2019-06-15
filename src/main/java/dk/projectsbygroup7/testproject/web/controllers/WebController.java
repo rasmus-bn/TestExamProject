@@ -1,5 +1,6 @@
 package dk.projectsbygroup7.testproject.web.controllers;
 
+import dk.projectsbygroup7.testproject.dataaccess.DBConnection;
 import dk.projectsbygroup7.testproject.pojos.Course;
 import dk.projectsbygroup7.testproject.pojos.CreditCardInfo;
 import dk.projectsbygroup7.testproject.pojos.User;
@@ -22,8 +23,12 @@ public class WebController {
     @Autowired
     CourseService courseService;
 
+    @Autowired
+    DBConnection dbConn;
+
     @RequestMapping(value={"", "/", "/index","/home"})
     public String home() {
+        dbConn.getConn();
         return "home.html";
     }
 
