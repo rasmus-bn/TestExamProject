@@ -1,11 +1,11 @@
 package dk.projectsbygroup7.testproject.web.controllers;
 
-import dk.projectsbygroup7.testproject.dataaccess.CourseDAO;
-import dk.projectsbygroup7.testproject.dataaccess.DBConnHandler;
+import dk.projectsbygroup7.testproject.dataaccess.course.CourseDAO;
+import dk.projectsbygroup7.testproject.dataaccess.DBConnection;
 import dk.projectsbygroup7.testproject.pojos.Course;
 import dk.projectsbygroup7.testproject.pojos.CreditCardInfo;
 import dk.projectsbygroup7.testproject.pojos.Subject;
-import dk.projectsbygroup7.testproject.pojos.User;
+import dk.projectsbygroup7.testproject.pojos.Student;
 import dk.projectsbygroup7.testproject.services.CourseService;
 import dk.projectsbygroup7.testproject.web.exceptions.Exception404;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class WebController {
     CourseDAO courseDAO;
 
     @Autowired
-    DBConnHandler dbConn;
+    DBConnection dbConn;
 
     @RequestMapping(value={"", "/", "/index","/home"})
     public String home() {
@@ -35,7 +35,7 @@ public class WebController {
 
         Subject eng = new Subject();
         eng.setName("eng");
-        int i = courseDAO.createCourse(new Course(
+        int i = courseDAO.createNew(new Course(
                 0,
                 eng,
                 30,
@@ -83,10 +83,10 @@ public class WebController {
                 expirationYear + "",
                 cvv + ""
         );
-        User user = new User(name, LocalDate.parse(birthday), email);
+        Student student = new Student(0, name, LocalDate.parse(birthday), email);
 
         try {
-            courseService.enrollInCourse(card, user);
+            courseService.enrollInCourse(card, student);
             return "succes";
         } catch (Exception e) {
             e.printStackTrace();

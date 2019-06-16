@@ -5,6 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface IResultRowReader<T> {
-    T readResult(ResultSet row) throws SQLException;
+public interface IResultReader<T> {
+    T readResult(ResultSet result) throws SQLException;
 }

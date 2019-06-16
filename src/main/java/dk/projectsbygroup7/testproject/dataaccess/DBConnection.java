@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 @Service
-public class DBConnHandler {
+public class DBConnection {
     @Value("${dbconnectionstring}")
     private String dbConString;
 
@@ -53,7 +53,7 @@ public class DBConnHandler {
         }
     }
 
-    public int doInsert(String sql, IPreparer preparer) {
+    public int doInsert(String sql, IPreparator preparer) {
         Connection conn = this.getConn();
         PreparedStatement stmt = null;
 
@@ -83,7 +83,7 @@ public class DBConnHandler {
         return 0;
     }
 
-    public <T> ArrayList<T> doSelectAll(String sql, IResultRowReader<T> reader) {
+    public <T> ArrayList<T> doSelectAll(String sql, IResultReader<T> reader) {
         ArrayList resultList = new ArrayList();
         Connection conn = this.getConn();
         ResultSet rs = null;
@@ -106,5 +106,30 @@ public class DBConnHandler {
         }
 
         return resultList;
+    }
+
+    public <T> T doSelectById(String sql, int id, IResultReader<T> reader) {
+        Connection conn = this.getConn();
+        ResultSet rs = null;
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                return reader.readResult(rs);
+            }
+        }
+        catch (SQLException ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        finally {
+            this.closeConn(rs,stmt,conn);
+        }
+
+        return null;
     }
 }

@@ -2,18 +2,28 @@ package dk.projectsbygroup7.testproject.pojos;
 
 import java.time.LocalDate;
 
-public class User {
+public class Student {
+    int id;
     String name;
     LocalDate birthday;
     String email;
 
-    public User() {
+    public Student() {
     }
 
-    public User(String name, LocalDate birthday, String email) {
+    public Student(int id, String name, LocalDate birthday, String email) {
+        this.id = id;
         this.name = name;
         this.birthday = birthday;
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -11,7 +11,7 @@ public class TestDB {
         Connection conn = null;
 
 
-        dbConString = "jdbc:mysql://172.17.0.2/test_exam?user=projectuser&password=boB4.321";
+        dbConString = "jdbc:mysql://172.17.0.2/test_exam?student=projectuser&password=boB4.321";
         conn = null;
         System.out.println(dbConString);
         try {

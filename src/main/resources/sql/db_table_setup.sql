@@ -29,3 +29,4 @@ create table enrollment (
     foreign key (student_id) references student(id),
     foreign key (course_id) references course(id)
 );
+
