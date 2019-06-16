@@ -7,11 +7,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class InsertStudentPreparator implements IPreparator {
+public class StudentUpdatePreparator implements IPreparator {
 
     private Student student;
 
-    public InsertStudentPreparator(Student student) {
+    public StudentUpdatePreparator(Student student) {
         this.student = student;
     }
 
@@ -21,6 +21,7 @@ public class InsertStudentPreparator implements IPreparator {
         stmt.setString(2, student.getEmail());
         Date birthDay = Date.valueOf(student.getBirthday());
         stmt.setDate(3, birthDay);
+        stmt.setInt(4, student.getId());
         return stmt;
     }
 }

@@ -7,11 +7,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class InsertCoursePreparator implements IPreparator {
+public class CourseInsertPreparator implements IPreparator {
 
     private Course newCourse;
 
-    public InsertCoursePreparator(Course newCourse) {
+    public CourseInsertPreparator(Course newCourse) {
         this.newCourse = newCourse;
     }
 

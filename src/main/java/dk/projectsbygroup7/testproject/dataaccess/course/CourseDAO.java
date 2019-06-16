@@ -20,7 +20,7 @@ public class CourseDAO {
                 "values (?,?,?,?); " +
                 "select last_insert_id() as id;";
 
-        return dbConn.doInsert(sql, new InsertCoursePreparator(newCourse));
+        return dbConn.doInsert(sql, new CourseInsertPreparator(newCourse));
     }
 
     public ArrayList<Course> getAll() {

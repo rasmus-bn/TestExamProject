@@ -53,13 +53,19 @@ public class DBConnection {
         }
     }
 
-    public int doInsert(String sql, IPreparator preparer) {
+    private void printExceptionInfo(SQLException ex){
+        System.out.println("SQLException: " + ex.getMessage());
+        System.out.println("SQLState: " + ex.getSQLState());
+        System.out.println("VendorError: " + ex.getErrorCode());
+    }
+
+    public int doInsert(String sql, IPreparator preparator) {
         Connection conn = this.getConn();
         PreparedStatement stmt = null;
 
         try {
             stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            stmt = preparer.prepare(stmt);
+            stmt = preparator.prepare(stmt);
             stmt.executeUpdate();
 
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
@@ -72,9 +78,7 @@ public class DBConnection {
             }
         }
         catch (SQLException ex){
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
+            this.printExceptionInfo(ex);
         }
         finally {
             this.closeConn(null,stmt,conn);
@@ -97,9 +101,7 @@ public class DBConnection {
             }
         }
         catch (SQLException ex){
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
+            this.printExceptionInfo(ex);
         }
         finally {
             this.closeConn(rs,stmt,conn);
@@ -117,19 +119,64 @@ public class DBConnection {
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 return reader.readResult(rs);
             }
         }
         catch (SQLException ex){
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
+            this.printExceptionInfo(ex);
         }
         finally {
             this.closeConn(rs,stmt,conn);
         }
 
         return null;
+    }
+
+    public <T> ArrayList<T> doSelectByValue(
+            String sql,
+            IPreparator preparator,
+            IResultReader<T> reader
+    ) {
+        ArrayList resultList = new ArrayList();
+        Connection conn = this.getConn();
+        ResultSet rs = null;
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt = preparator.prepare(stmt);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                resultList.add(reader.readResult(rs));
+            }
+        }
+        catch (SQLException ex){
+            this.printExceptionInfo(ex);
+        }
+        finally {
+            this.closeConn(rs,stmt,conn);
+        }
+
+        return resultList;
+    }
+
+    public boolean doUpdate(String sql, IPreparator preparator) {
+        Connection conn = this.getConn();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt = preparator.prepare(stmt);
+            stmt.executeUpdate();
+            return true;
+        }
+        catch (SQLException ex){
+            this.printExceptionInfo(ex);
+        }
+        finally {
+            this.closeConn(null,stmt,conn);
+        }
+        return false;
     }
 }
