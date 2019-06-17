@@ -24,45 +24,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 //@RunWith(Parameterized.class)
 public class CreditCardValidatorTest {
-
-//    private CreditCardInfo card;
-//    private boolean expected;
-
-//    public CreditCardValidatorTest(
-//        String cardNumber,
-//        String expirationMonth,
-//        String expirationYear,
-//        String cvv,
-//        boolean expected) {
-//
-//        this.card = new CreditCardInfo(
-//                cardNumber,
-//                expirationMonth,
-//                expirationYear,
-//                cvv);
-//        this.expected = expected;
-//    }
-
-//    @Parameterized.Parameters
-    public static Collection parameters () {
-        return Arrays.asList(new Object[][]{
-                { "123322233232", "2", "2019", "222", true },
-                { "123322233232", "2", "2019", "222", true },
-                { "123322233232", "2", "2019", "222", true },
-        });
-    }
-
     @Mock
     private TimeService time;
-
     @InjectMocks
     private CreditCardValidator cardValidator;
-
     @BeforeEach
     public void initMocks(){
         MockitoAnnotations.initMocks(this);
     }
-
     @ParameterizedTest
     @CsvFileSource(resources = "/csv/CreditCardValidatorTest.csv")
     void checkCardFormat(
@@ -71,7 +40,6 @@ public class CreditCardValidatorTest {
             String expirationYear,
             String cvv,
             boolean expected) {
-
         CreditCardInfo cardInfo = new CreditCardInfo(
                 cardNumber,
                 expirationMonth,
