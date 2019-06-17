@@ -1,5 +1,7 @@
 package dk.projectsbygroup7.testproject.dataaccess;
 
+import dk.projectsbygroup7.testproject.dataaccess.resultreaders.IResultReader;
+import dk.projectsbygroup7.testproject.dataaccess.statementpreparators.IStatementPreparator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -59,7 +61,7 @@ public class DBConnection {
         System.out.println("VendorError: " + ex.getErrorCode());
     }
 
-    public int doInsert(String sql, IPreparator preparator) {
+    public int doInsert(String sql, IStatementPreparator preparator) {
         Connection conn = this.getConn();
         PreparedStatement stmt = null;
 
@@ -68,14 +70,9 @@ public class DBConnection {
             stmt = preparator.prepare(stmt);
             stmt.executeUpdate();
 
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1);
-                }
-                else {
-                    return 0;
-                }
-            }
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+
+            return generatedKeys.getInt(1);
         }
         catch (SQLException ex){
             this.printExceptionInfo(ex);
@@ -135,7 +132,7 @@ public class DBConnection {
 
     public <T> ArrayList<T> doSelectByValue(
             String sql,
-            IPreparator preparator,
+            IStatementPreparator preparator,
             IResultReader<T> reader
     ) {
         ArrayList resultList = new ArrayList();
@@ -161,7 +158,7 @@ public class DBConnection {
         return resultList;
     }
 
-    public boolean doUpdate(String sql, IPreparator preparator) {
+    public boolean doUpdate(String sql, IStatementPreparator preparator) {
         Connection conn = this.getConn();
         PreparedStatement stmt = null;
 

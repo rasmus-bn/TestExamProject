@@ -7,8 +7,6 @@
 </head>
 <body>
 
-<input type="hidden" th:val="${course.id}">
-
 <h1 th:text="${course.subject.name}"></h1>
 <br/>
 <label th:text="${course.hours} + ' hours long'"></label>
@@ -20,6 +18,9 @@
 
 <h2>Please enter below information to enroll the to course</h2>
 <form action="/enrollcourse" method="post">
+    <div class="form-group">
+        <input id="courseId" type="hidden" name="courseId" th:value="${course.id}">
+    </div>
     <div class="form-group">
         <label for="name">Name:</label>
         <input id="name" name="name" type="text"/>

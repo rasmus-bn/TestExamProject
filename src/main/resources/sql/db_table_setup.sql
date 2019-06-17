@@ -18,7 +18,8 @@ create table student (
     id int primary key auto_increment,
     name nvarchar(500),
     email nvarchar(500),
-    birthday date
+    birthday date,
+    unique(email)
 );
 
 create table enrollment (
