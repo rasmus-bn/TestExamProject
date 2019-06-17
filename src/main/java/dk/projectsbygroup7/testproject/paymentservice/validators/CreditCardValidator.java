@@ -1,7 +1,7 @@
-package dk.projectsbygroup7.testproject.paymentservice;
+package dk.projectsbygroup7.testproject.paymentservice.validators;
 
 import dk.projectsbygroup7.testproject.pojos.CreditCardInfo;
-import dk.projectsbygroup7.testproject.services.TimeService;
+import dk.projectsbygroup7.testproject.timeservice.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

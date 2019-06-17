@@ -1,17 +1,17 @@
-package dk.projectsbygroup7.testproject.dataaccess.course;
+package dk.projectsbygroup7.testproject.dataaccess.statementpreparators;
 
-import dk.projectsbygroup7.testproject.dataaccess.IPreparator;
+import dk.projectsbygroup7.testproject.dataaccess.statementpreparators.IStatementPreparator;
 import dk.projectsbygroup7.testproject.pojos.Course;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class InsertCoursePreparator implements IPreparator {
+public class CourseInsertPreparator implements IStatementPreparator {
 
     private Course newCourse;
 
-    public InsertCoursePreparator(Course newCourse) {
+    public CourseInsertPreparator(Course newCourse) {
         this.newCourse = newCourse;
     }
 

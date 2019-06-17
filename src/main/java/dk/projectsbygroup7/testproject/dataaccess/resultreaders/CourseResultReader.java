@@ -1,6 +1,6 @@
-package dk.projectsbygroup7.testproject.dataaccess.course;
+package dk.projectsbygroup7.testproject.dataaccess.resultreaders;
 
-import dk.projectsbygroup7.testproject.dataaccess.IResultReader;
+import dk.projectsbygroup7.testproject.dataaccess.resultreaders.IResultReader;
 import dk.projectsbygroup7.testproject.pojos.Course;
 import dk.projectsbygroup7.testproject.pojos.Subject;
 

@@ -1,6 +1,7 @@
-package dk.projectsbygroup7.testproject.dataaccess.course;
+package dk.projectsbygroup7.testproject.dataaccess;
 
-import dk.projectsbygroup7.testproject.dataaccess.DBConnection;
+import dk.projectsbygroup7.testproject.dataaccess.statementpreparators.CourseInsertPreparator;
+import dk.projectsbygroup7.testproject.dataaccess.resultreaders.CourseResultReader;
 import dk.projectsbygroup7.testproject.pojos.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class CourseDAO {
                 "values (?,?,?,?); " +
                 "select last_insert_id() as id;";
 
-        return dbConn.doInsert(sql, new InsertCoursePreparator(newCourse));
+        return dbConn.doInsert(sql, new CourseInsertPreparator(newCourse));
     }
 
     public ArrayList<Course> getAll() {

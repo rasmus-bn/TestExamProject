@@ -1,17 +1,16 @@
-package dk.projectsbygroup7.testproject.dataaccess.student;
+package dk.projectsbygroup7.testproject.dataaccess.statementpreparators;
 
-import dk.projectsbygroup7.testproject.dataaccess.IPreparator;
 import dk.projectsbygroup7.testproject.pojos.Student;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class InsertStudentPreparator implements IPreparator {
+public class StudentUpdatePreparator implements IStatementPreparator {
 
     private Student student;
 
-    public InsertStudentPreparator(Student student) {
+    public StudentUpdatePreparator(Student student) {
         this.student = student;
     }
 
@@ -21,6 +20,7 @@ public class InsertStudentPreparator implements IPreparator {
         stmt.setString(2, student.getEmail());
         Date birthDay = Date.valueOf(student.getBirthday());
         stmt.setDate(3, birthDay);
+        stmt.setInt(4, student.getId());
         return stmt;
     }
 }

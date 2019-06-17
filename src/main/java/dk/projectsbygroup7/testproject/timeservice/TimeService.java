@@ -1,10 +1,9 @@
-package dk.projectsbygroup7.testproject.services;
+package dk.projectsbygroup7.testproject.timeservice;
 
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-
-import static java.time.temporal.ChronoUnit.YEARS;
+import java.time.Period;
 
 @Service
 public class TimeService {
@@ -25,7 +24,8 @@ public class TimeService {
         return getNow().getDayOfMonth();
     }
 
-    public long calcYearlyDifference(LocalDate fromDate, LocalDate toDate){
-        return YEARS.between(fromDate, toDate);
+    public int calcYearlyDifference(LocalDate fromDate, LocalDate toDate){
+        int diff = Period.between(fromDate, toDate).getYears();
+        return Math.abs(diff);
     }
 }

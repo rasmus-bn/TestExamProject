@@ -1,9 +1,6 @@
-package dk.projectsbygroup7.testproject.dataaccess.student;
+package dk.projectsbygroup7.testproject.dataaccess.resultreaders;
 
-import dk.projectsbygroup7.testproject.dataaccess.IResultReader;
-import dk.projectsbygroup7.testproject.pojos.Course;
 import dk.projectsbygroup7.testproject.pojos.Student;
-import dk.projectsbygroup7.testproject.pojos.Subject;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

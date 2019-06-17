@@ -1,4 +1,4 @@
-package dk.projectsbygroup7.testproject.web.exceptions;
+package dk.projectsbygroup7.testproject.presentation.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

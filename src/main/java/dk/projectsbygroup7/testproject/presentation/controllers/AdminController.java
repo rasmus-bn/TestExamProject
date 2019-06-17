@@ -1,4 +1,4 @@
-package dk.projectsbygroup7.testproject.web.controllers;
+package dk.projectsbygroup7.testproject.presentation.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

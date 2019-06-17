@@ -1,13 +1,11 @@
-package dk.projectsbygroup7.testproject.web.controllers;
+package dk.projectsbygroup7.testproject.presentation.controllers;
 
-import dk.projectsbygroup7.testproject.dataaccess.course.CourseDAO;
-import dk.projectsbygroup7.testproject.dataaccess.DBConnection;
+import dk.projectsbygroup7.testproject.business.StudentService;
 import dk.projectsbygroup7.testproject.pojos.Course;
 import dk.projectsbygroup7.testproject.pojos.CreditCardInfo;
-import dk.projectsbygroup7.testproject.pojos.Subject;
 import dk.projectsbygroup7.testproject.pojos.Student;
-import dk.projectsbygroup7.testproject.services.CourseService;
-import dk.projectsbygroup7.testproject.web.exceptions.Exception404;
+import dk.projectsbygroup7.testproject.business.CourseService;
+import dk.projectsbygroup7.testproject.presentation.exceptions.Exception404;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,25 +22,10 @@ public class WebController {
     CourseService courseService;
 
     @Autowired
-    CourseDAO courseDAO;
-
-    @Autowired
-    DBConnection dbConn;
+    StudentService studentService;
 
     @RequestMapping(value={"", "/", "/index","/home"})
     public String home() {
-        //dbConn.getConn();
-
-        Subject eng = new Subject();
-        eng.setName("eng");
-        int i = courseDAO.createNew(new Course(
-                0,
-                eng,
-                30,
-                LocalDate.now(),
-                LocalDate.now()
-        ));
-        System.out.println(i);
         return "home.html";
     }
 
@@ -68,6 +51,7 @@ public class WebController {
 
     @RequestMapping("enrollcourse")
     public String enrollToCourse(
+            @RequestParam String courseId,
             @RequestParam String name,
             @RequestParam String birthday,
             @RequestParam String email,
@@ -85,12 +69,7 @@ public class WebController {
         );
         Student student = new Student(0, name, LocalDate.parse(birthday), email);
 
-        try {
-            courseService.enrollInCourse(card, student);
-            return "succes";
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "error";
+        studentService.enrollInCourse(card, student, Integer.parseInt(courseId));
+        return "enrollmentsuccess.html";
     }
 }
