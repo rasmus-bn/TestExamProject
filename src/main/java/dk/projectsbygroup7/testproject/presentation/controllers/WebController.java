@@ -1,13 +1,10 @@
 package dk.projectsbygroup7.testproject.presentation.controllers;
 
-import dk.projectsbygroup7.testproject.businesslayer.StudentService;
-import dk.projectsbygroup7.testproject.dataaccess.CourseDAO;
-import dk.projectsbygroup7.testproject.dataaccess.DBConnection;
+import dk.projectsbygroup7.testproject.business.StudentService;
 import dk.projectsbygroup7.testproject.pojos.Course;
 import dk.projectsbygroup7.testproject.pojos.CreditCardInfo;
-import dk.projectsbygroup7.testproject.pojos.Subject;
 import dk.projectsbygroup7.testproject.pojos.Student;
-import dk.projectsbygroup7.testproject.businesslayer.CourseService;
+import dk.projectsbygroup7.testproject.business.CourseService;
 import dk.projectsbygroup7.testproject.presentation.exceptions.Exception404;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

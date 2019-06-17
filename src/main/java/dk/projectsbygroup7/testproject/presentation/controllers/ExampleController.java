@@ -1,6 +1,6 @@
 package dk.projectsbygroup7.testproject.presentation.controllers;
 
-import dk.projectsbygroup7.testproject.businesslayer.ExampleService;
+import dk.projectsbygroup7.testproject.business.ExampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

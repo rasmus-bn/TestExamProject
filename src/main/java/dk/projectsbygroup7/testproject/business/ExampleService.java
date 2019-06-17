@@ -1,4 +1,4 @@
-package dk.projectsbygroup7.testproject.businesslayer;
+package dk.projectsbygroup7.testproject.business;
 
 import org.springframework.stereotype.Service;
 

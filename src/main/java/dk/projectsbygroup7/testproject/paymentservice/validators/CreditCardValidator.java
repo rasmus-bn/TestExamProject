@@ -1,4 +1,4 @@
-package dk.projectsbygroup7.testproject.unittests.paymentservice.validators;
+package dk.projectsbygroup7.testproject.paymentservice.validators;
 
 import dk.projectsbygroup7.testproject.pojos.CreditCardInfo;
 import dk.projectsbygroup7.testproject.timeservice.TimeService;

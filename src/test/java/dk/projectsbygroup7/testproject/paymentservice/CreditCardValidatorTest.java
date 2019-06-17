@@ -1,6 +1,6 @@
-package dk.projectsbygroup7.testproject.unittests.paymentservice;
+package dk.projectsbygroup7.testproject.paymentservice;
 
-import dk.projectsbygroup7.testproject.unittests.paymentservice.validators.CreditCardValidator;
+import dk.projectsbygroup7.testproject.paymentservice.validators.CreditCardValidator;
 import dk.projectsbygroup7.testproject.pojos.CreditCardInfo;
 import dk.projectsbygroup7.testproject.timeservice.TimeService;
 import org.junit.jupiter.api.BeforeEach;

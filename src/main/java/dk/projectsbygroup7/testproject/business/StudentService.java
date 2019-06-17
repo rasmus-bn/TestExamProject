@@ -1,9 +1,9 @@
-package dk.projectsbygroup7.testproject.businesslayer;
+package dk.projectsbygroup7.testproject.business;
 
-import dk.projectsbygroup7.testproject.businesslayer.exceptions.BirthdayChangedException;
-import dk.projectsbygroup7.testproject.businesslayer.exceptions.UnderAgeException;
+import dk.projectsbygroup7.testproject.business.exceptions.BirthdayChangedException;
+import dk.projectsbygroup7.testproject.business.exceptions.UnderAgeException;
 import dk.projectsbygroup7.testproject.dataaccess.StudentDAO;
-import dk.projectsbygroup7.testproject.unittests.paymentservice.PaymentService;
+import dk.projectsbygroup7.testproject.paymentservice.PaymentService;
 import dk.projectsbygroup7.testproject.pojos.*;
 import dk.projectsbygroup7.testproject.timeservice.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
