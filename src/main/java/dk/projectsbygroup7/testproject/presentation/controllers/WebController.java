@@ -70,6 +70,7 @@ public class WebController {
         Student student = new Student(0, name, LocalDate.parse(birthday), email);
 
         studentService.enrollInCourse(card, student, Integer.parseInt(courseId));
-        return "enrollmentsuccess.html";
+        model.addAttribute("message", "Enrollment succes");
+        return "succesmessage.html";
     }
 }

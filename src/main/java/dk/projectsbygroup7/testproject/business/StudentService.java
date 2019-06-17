@@ -54,9 +54,8 @@ public class StudentService {
 
         paymentService.performPayment(card);
 
-        System.out.println("before enroll");
-        System.out.println(studentDAO.enrollToCourse(enrollment));
-        System.out.println("after enroll");
+        studentDAO.enrollToCourse(enrollment);
+
         enrollment.setPaymentRecieved(true);
 
         return enrollment;
